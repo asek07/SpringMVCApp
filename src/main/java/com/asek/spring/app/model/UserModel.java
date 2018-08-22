@@ -15,6 +15,8 @@ public class UserModel {
     @Column(name="fave_colour")
     private String fave_colour;
 
+    public void setUser_id(long user_id) { this.user_id = user_id; }
+
     public long getUser_id() {
         return user_id;
     }

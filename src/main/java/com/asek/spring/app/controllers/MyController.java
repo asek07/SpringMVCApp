@@ -30,4 +30,16 @@ public class MyController {
     public Map getUserData(@PathVariable String userID) {
         return service.findById(Long.parseLong(userID));
     }
+
+    @RequestMapping("/users/add")
+    public String addOrUpdateUser() {
+        UserModel j = new UserModel();
+        j.setUser_id(1);
+        j.setFave_colour("Green");
+
+        service.saveOrUpdate(j);
+
+        return "Adding user...";
+
+    }
 }

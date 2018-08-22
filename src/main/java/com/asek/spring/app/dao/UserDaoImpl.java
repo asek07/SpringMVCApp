@@ -2,15 +2,11 @@ package com.asek.spring.app.dao;
 
 import com.asek.spring.app.model.UserModel;
 import org.hibernate.Session;
-
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -30,11 +26,12 @@ public class UserDaoImpl implements UserDao {
         TreeMap<String, String > tmap = new TreeMap<>();
         Session session = getSession();
         Transaction transaction = getSession().beginTransaction();
-        String output = "";
         UserModel user = session.load(UserModel.class, id);
 
         tmap.put("ID", String.valueOf(user.getUser_id()));
         tmap.put("fave_colour", user.getFave_colour());
+        transaction.commit();
+        session.close();
 
         return tmap;
     }
@@ -50,7 +47,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveOrUpdate(UserModel u) {
+        Session session = getSession();
+        Transaction transaction = getSession().beginTransaction();
 
+        session.saveOrUpdate(u);
+        transaction.commit();
+        session.close();
     }
 
     @Override

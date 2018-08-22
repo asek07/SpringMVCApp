@@ -2,6 +2,7 @@ package com.asek.spring.app.service;
 
 import com.asek.spring.app.model.UserModel;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -10,5 +11,6 @@ public interface UserService {
     public void saveUser(UserModel u);
     public void saveOrUpdate(UserModel u);
     public void deleteById(long id);
+    List getAllUsers();
 
 }

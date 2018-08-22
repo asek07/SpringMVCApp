@@ -12,6 +12,9 @@ public class UserModel {
     @Column(name="user_id")
     private long user_id;
 
+    @Column(name="name")
+    private String name;
+
     @Column(name="fave_colour")
     private String fave_colour;
 
@@ -20,6 +23,10 @@ public class UserModel {
     public long getUser_id() {
         return user_id;
     }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public String getFave_colour() {
         return fave_colour;

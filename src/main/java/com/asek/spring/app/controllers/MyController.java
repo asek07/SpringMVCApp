@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,6 +21,7 @@ public class MyController {
     public String returnData() {
 
         UserModel u = new UserModel();
+        u.setName("John");
         u.setFave_colour("purple");
 
         service.saveUser(u);
@@ -28,14 +30,15 @@ public class MyController {
 
     @RequestMapping("/user/{userID}")
     public Map getUserData(@PathVariable String userID) {
+
         return service.findById(Long.parseLong(userID));
     }
 
     @RequestMapping("/users/add")
     public String addOrUpdateUser() {
         UserModel j = new UserModel();
-        j.setUser_id(1);
-        j.setFave_colour("Green");
+        j.setName("Bob");
+        j.setFave_colour("blue");
 
         service.saveOrUpdate(j);
 
@@ -48,5 +51,10 @@ public class MyController {
         service.deleteById(Long.parseLong(userID));
 
         return "Deleting user ID=" + userID;
+    }
+
+    @RequestMapping("/allusers")
+    public List getAll() {
+        return service.getAllUsers();
     }
 }

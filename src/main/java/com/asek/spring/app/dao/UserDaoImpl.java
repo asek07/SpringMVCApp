@@ -2,11 +2,13 @@ package com.asek.spring.app.dao;
 
 import com.asek.spring.app.model.UserModel;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -65,5 +67,16 @@ public class UserDaoImpl implements UserDao {
 
         transaction.commit();
         session.close();
+    }
+
+    @Override
+    public List<UserModel> getAllUsers() {
+        List<UserModel> userList;
+        Session session = getSession();
+
+        userList = session.createCriteria(UserModel.class).list();
+
+        return userList;
+
     }
 }

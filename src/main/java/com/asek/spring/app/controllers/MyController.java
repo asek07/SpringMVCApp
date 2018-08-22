@@ -40,6 +40,13 @@ public class MyController {
         service.saveOrUpdate(j);
 
         return "Adding user...";
+    }
 
+    @RequestMapping("/user/delete/{userID}")
+    public String deleteUser(@PathVariable String userID) {
+
+        service.deleteById(Long.parseLong(userID));
+
+        return "Deleting user ID=" + userID;
     }
 }

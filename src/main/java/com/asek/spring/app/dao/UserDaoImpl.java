@@ -57,6 +57,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteById(long id) {
+        Session session = getSession();
+        Transaction transaction = getSession().beginTransaction();
 
+        UserModel user = session.load(UserModel.class, id);
+        session.delete(user);
+
+        transaction.commit();
+        session.close();
     }
 }

@@ -4,8 +4,6 @@ import com.asek.spring.app.dao.UserDao;
 import com.asek.spring.app.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.Map;
 
 @Service("studentService")
@@ -31,6 +29,6 @@ public class UserServiceImpl implements  UserService {
 
     @Override
     public void deleteById(long id) {
-
+        dao.deleteById(id);
     }
 }

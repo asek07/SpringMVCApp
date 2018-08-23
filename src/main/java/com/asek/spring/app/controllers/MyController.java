@@ -4,9 +4,7 @@ package com.asek.spring.app.controllers;
 import com.asek.spring.app.model.UserModel;
 import com.asek.spring.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -34,15 +32,21 @@ public class MyController {
         return service.findById(Long.parseLong(userID));
     }
 
-    @RequestMapping("/users/add")
-    public String addOrUpdateUser() {
-        UserModel j = new UserModel();
-        j.setName("Bob");
-        j.setFave_colour("blue");
+    @RequestMapping(value="/users/addUser", produces = {"application/json"}, method = RequestMethod.POST)
+    public String addOrUpdateUser(@RequestParam("name") String name, @RequestParam("fave_colour") String colour) {
 
-        service.saveOrUpdate(j);
+        String output = name + " " + colour;
+        UserModel user = new UserModel();
 
-        return "Adding user...";
+        name = name.trim();
+        colour = colour.trim();
+
+        user.setName(name);
+        user.setFave_colour(colour);
+
+        service.saveOrUpdate(user);
+
+        return output;
     }
 
     @RequestMapping("/user/delete/{userID}")

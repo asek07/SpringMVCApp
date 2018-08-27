@@ -32,6 +32,7 @@ public class UserDaoImpl implements UserDao {
 
         tmap.put("ID", String.valueOf(user.getUser_id()));
         tmap.put("fave_colour", user.getFave_colour());
+        tmap.put("name", user.getName());
         transaction.commit();
         session.close();
 

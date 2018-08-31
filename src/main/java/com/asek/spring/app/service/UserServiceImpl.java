@@ -36,4 +36,9 @@ public class UserServiceImpl implements  UserService {
 
     @Override
     public List getAllUsers() { return dao.getAllUsers(); }
+
+    @Override
+    public void updateUser(UserModel u) {
+        dao.updateUser(u);
+    }
 }

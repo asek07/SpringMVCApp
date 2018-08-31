@@ -12,5 +12,6 @@ public interface UserService {
     public void saveOrUpdate(UserModel u);
     public void deleteById(long id);
     List getAllUsers();
+    void updateUser(UserModel u);
 
 }

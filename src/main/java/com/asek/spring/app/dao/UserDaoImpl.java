@@ -77,6 +77,17 @@ public class UserDaoImpl implements UserDao {
         userList = session.createCriteria(UserModel.class).list();
 
         return userList;
+    }
+
+    @Override
+    public void updateUser(UserModel u) {
+        Session session = getSession();
+        Transaction transaction = getSession().beginTransaction();
+
+        session.update(u);
+        transaction.commit();
+
+        session.close();
 
     }
 }

@@ -33,7 +33,7 @@ public class MyController {
     }
 
     @RequestMapping(value="/users/addUser", produces = {"application/json"}, method = RequestMethod.POST)
-    public String addOrUpdateUser(@RequestParam("name") String name, @RequestParam("fave_colour") String colour) {
+    public UserModel addOrUpdateUser(@RequestParam("name") String name, @RequestParam("fave_colour") String colour) {
 
         String output = name + " " + colour;
         UserModel user = new UserModel();
@@ -46,7 +46,7 @@ public class MyController {
 
         service.saveOrUpdate(user);
 
-        return output;
+        return user;
     }
 
     @RequestMapping("/user/delete/{userID}")
@@ -60,5 +60,23 @@ public class MyController {
     @RequestMapping("/allusers")
     public List getAll() {
         return service.getAllUsers();
+    }
+
+    @RequestMapping(value="/users/updateUser", produces = {"application/json"}, method = RequestMethod.POST)
+    public UserModel updateUser(@RequestParam("id") long id, @RequestParam("name") String name, @RequestParam("fave_colour") String colour) {
+
+        String output = name + " " + colour;
+        UserModel user = new UserModel();
+
+        name = name.trim();
+        colour = colour.trim();
+
+        user.setUser_id(id);
+        user.setName(name);
+        user.setFave_colour(colour);
+
+        service.updateUser(user);
+
+        return user;
     }
 }

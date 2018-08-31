@@ -14,5 +14,6 @@ public interface UserDao {
     //TODO:
     //implement get all table results from mysql into json
    List getAllUsers();
+   void updateUser(UserModel u);
 
 }
